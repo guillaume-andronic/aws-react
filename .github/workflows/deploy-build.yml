@@ -13,6 +13,28 @@ jobs:
         with:
           node-version: '10.x'
       - run: yarn install
+      - run: yarn build
+      - uses: actions/upload-artifact@v1
+        with:
+          name: application
+          path: build/
+
+lnnyls  12 h 28
+name: Build and deploy
+on:
+  push:
+    tags:
+      - v*
+jobs:
+  build:
+    name: Build application
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - run: yarn install
       - run: yarn build 
       - uses: actions/upload-artifact@v1
         with:
@@ -25,6 +47,9 @@ jobs:
     steps:
       - uses: actions/download-artifact@v1
         with:
+          name: application
+      - uses: actions/setup-python@v1
+        with: 
           python-version: '3.x'
       - run: pip install awscli
       - name: Configure AWS Credential
