@@ -22,7 +22,7 @@ function App() {
             <AppBar position="static">
                 <Toolbar>
                     <Typography variant="h6" className={classes.title}>
-                        Blog Guillaume
+                        Blog
                     </Typography>
                 </Toolbar>
             </AppBar>
